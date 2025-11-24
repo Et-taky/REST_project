@@ -34,6 +34,7 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-
+/resources/application.properties
+*.sql
 ### VS Code ###
 .vscode/

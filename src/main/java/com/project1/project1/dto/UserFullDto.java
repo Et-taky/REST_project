@@ -1,47 +1,48 @@
-package com.project1.project1.model;
+package com.project1.project1.dto;
 
 import com.project1.project1.enums.Title;
-import jakarta.persistence.*;
+import com.project1.project1.model.Location;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
+
+import org.hibernate.validator.constraints.URL;
+
 import java.util.UUID;
 
-@Entity
-public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+public class UserFullDto {
+
     private UUID id;
-
-    @Enumerated(EnumType.STRING)
+    @NotNull(message = "{user.notnull.title}")
     private Title title;
+
+    @NotNull(message = "{user.notnull.firstname}")
+    @Size(min=2,max = 50,message = "{user.firstname.size")
     private String firstName;
+
+    @NotNull(message = "{user.notnull.lastname}")
+    @Size(min=2,max = 50,message = "{user.lastname.size")
     private String lastName;
+
+    @NotNull(message = "{user.notnull.email}")
+    @Email(message = "{user.notvalid.email}")
     private String email;
     private LocalDate dateOfBirth;
-    private LocalDate registerDate = LocalDate.now();
+    private LocalDate registerDate;
     private String phone;
+
+    @URL(message = "{error.image.url}")
     private String picture;
-    @Embedded
+
     private Location location;
-
-
-    public User() {}
-
-    public User(Title title, String firstName, String lastName, String email, LocalDate dateOfBirth , String phone, String picture, Location location) {
-        this.title = title;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.dateOfBirth = dateOfBirth;
-        this.phone = phone;
-        this.picture = picture;
-        this.location = location;
-    }
 
     public UUID getId() {
         return id;
     }
-
     public void setId(UUID id) {
         this.id = id;
     }
@@ -70,38 +71,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public LocalDate getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegisterDate(LocalDate registerDate) {
-        this.registerDate =registerDate;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getPicture() {
         return picture;
     }
@@ -116,5 +85,30 @@ public class User {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+    public LocalDate getRegisterDate() {
+        return registerDate;
+    }
+    public void setRegisterDate(LocalDate registerDate) {
+        this.registerDate = registerDate;
+    }
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
